@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Accessible Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Accessible Tic-Tac-Toe</h1>
+      <p class="help">Play using mouse, touch, or keyboard (Tab then Enter/Space).</p>
+
+      <p class="status" role="status" aria-live="polite">{{ state.status }}</p>
+
+      <section aria-label="Tic-Tac-Toe Board">
+        <div class="board" role="grid" aria-label="3 by 3 game board">
+          {% for cell in state.board %}
+            {% set idx = loop.index0 %}
+            <form method="post" action="{{ url_for('move') }}" class="cell-form">
+              <input type="hidden" name="cell" value="{{ idx }}" />
+              <button
+                type="submit"
+                class="cell {% if cell == 'X' %}x{% elif cell == 'O' %}o{% endif %}"
+                aria-label="Row {{ (idx // 3) + 1 }}, Column {{ (idx % 3) + 1 }}{% if cell %}, occupied by {{ cell }}{% else %}, empty{% endif %}"
+                {% if cell or state.game_over %}disabled{% endif %}
+              >
+                {{ cell if cell else idx + 1 }}
+              </button>
+            </form>
+          {% endfor %}
+        </div>
+      </section>
+
+      <form method="post" action="{{ url_for('reset') }}">
+        <button type="submit" class="reset">Start New Game</button>
+      </form>
+    </main>
+  </body>
+</html>
