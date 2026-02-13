@@ -1,6 +1,6 @@
 # AWS
 
-Simple Tic-Tac-Toe game in Python with a multi-color terminal board.
+Simple Tic-Tac-Toe game in Python.
 
 ## Run
 
