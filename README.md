@@ -1,12 +1,6 @@
 # AWS
 
-Accessible Tic-Tac-Toe web app built with Flask.
-
-## Setup
-
-```bash
-python3 -m pip install flask
-```
+Simple Tic-Tac-Toe game in Python.
 
 ## Run
 
